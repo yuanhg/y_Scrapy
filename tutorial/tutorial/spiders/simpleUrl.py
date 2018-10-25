@@ -1,18 +1,26 @@
+"""
+    scrapy初始Url的两种写法，
+    一种是常量start_urls，并且需要定义一个方法parse（）
+    另一种是直接定义一个方法：star_requests()
+"""
 import scrapy
+class simpleUrl(scrapy.Spider):
+    name = "simpleUrl"
+    start_urls = [  #另外一种写法，无需定义start_requests方法
+        'http://lab.scrapyd.cn/page/1/',
+        'http://lab.scrapyd.cn/page/2/',
+    ]
 
-class t_spider(scrapy.Spider): #需要继承scrapy.Spider类
-    
-    name = "tutorial_spider" # 定义蜘蛛名
+    # 另外一种初始链接写法
+    # def start_requests(self):
+    #     urls = [ #爬取的链接由此方法通过下面链接爬取页面
+    #         'http://lab.scrapyd.cn/page/1/',
+    #         'http://lab.scrapyd.cn/page/2/',
+    #     ]
+    #     for url in urls:
+    #         yield scrapy.Request(url=url, callback=self.parse)
+    # 如果是简写初始url，此方法名必须为：parse
 
-    def start_requests(self): # 由此方法通过下面链接爬取页面
-        
-        # 定义爬取的链接
-        urls = [
-            'http://lab.scrapyd.cn/page/1/',
-            'http://lab.scrapyd.cn/page/2/',
-        ]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse) #爬取到的页面如何处理？提交给parse方法处理
 
     def parse(self, response):
 
@@ -25,8 +33,6 @@ class t_spider(scrapy.Spider): #需要继承scrapy.Spider类
         3、定义规则，然后提取数据；
         就是这么个流程，似不似很简单呀？
         '''
-
-
         page = response.url.split("/")[-2]     #根据上面的链接提取分页,如：/page/1/，提取到的就是：1
         filename = 'mingyan-%s.html' % page    #拼接文件名，如果是第一页，最终文件名便是：mingyan-1.html
         with open(filename, 'wb') as f:        #python文件操作，不多说了；
