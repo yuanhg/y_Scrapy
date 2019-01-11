@@ -1,17 +1,15 @@
 import scrapy
 
 # 需要继承scrapy.Spider类
-class baidu_s(scrapy.Spider):
+class scrapy_baidu(scrapy.Spider):
     # 定义蜘蛛名
-    name = "Baidu_Spider"
+    name = "bd_spider"
 
 
     def start_requests(self):  # 由此方法通过下面链接爬取页面
 
         # 定义爬取的链接
-        urls = [
-            'http://cn.bing.com',
-        ]
+        urls = [ 'http://cn.bing.com',    ]
         myHeaders = {
             'User-Agent': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
