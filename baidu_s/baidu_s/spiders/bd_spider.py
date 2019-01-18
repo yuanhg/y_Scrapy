@@ -7,21 +7,16 @@ class scrapy_baidu(scrapy.Spider):
 
 
     def start_requests(self):  # 由此方法通过下面链接爬取页面
-
+        #从文件中读取要搜索的关键词
+        wordList = []
+        for word in open('C:/Users/faqui/Documents/GitHub/y_Scrapy/baidu_s/KeyWord.txt'):
+            wordList.append(word.strip())
         # 定义爬取的链接
         urls = [ 'http://cn.bing.com',    ]
-        myHeaders = {
-            'User-Agent': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            "Accept-Language": "zh-CN,zh;q=0.9,en-US;q=0.5,en;q=0.3",
-            "Accept-Encoding": "gzip, deflate",
-            'Content-Length': '0',
-            "Connection": "keep-alive",
-        }
 
         for url in urls:
             # 爬取到的页面如何处理？提交给parse方法处理
-            yield scrapy.Request(url=url, callback=self.parse, headers=myHeaders)
+            yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         #page = response.url.split("/")[-2]  # 根据上面的链接提取分页,如：/page/1/，提取到的就是：1
