@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for XRK8 project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     https://doc.scrapy.org/en/latest/topics/settings.html
-#     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'Xrk8'
 
@@ -22,15 +15,13 @@ NEWSPIDER_MODULE = 'XRK8.spiders'
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 8
 
 # Configure a delay for requests for the same website (default: 0)
-# See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
-# See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
@@ -63,18 +54,25 @@ COOKIES_ENABLED = False
 #}
 
 # Configure item pipelines
-# See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'XRK8.pipelines.Xrk8Pipeline': 300,
+    'XRK8.pipelines.Xrk8Pipeline': 1,
 }
 
 HTTPERROR_ALLOWED_CODES = [301,302]
+MEDIA_ALLOW_REDIRECTS = True
 
 IMAGES_STORE = 'D:/wallpapers'
+IMAGES_URLS_FIELD = 'images'
+IMAGES_MIN_HEIGHT = 110
+IMAGES_MIN_WIDTH = 110
 
-#IMAGES_URLS_FIELD = 'images'
+#自动生成缩略图，在thumbs/small 和 thumbs/big下
+#IMAGES_THUMBS = {
+#    'small': (50, 50),
+#    'big': (270, 270),
+#}
+
 # Enable and configure the AutoThrottle extension (disabled by default)
-# See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay
 #AUTOTHROTTLE_START_DELAY = 5
@@ -87,7 +85,6 @@ IMAGES_STORE = 'D:/wallpapers'
 #AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
-# See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 #HTTPCACHE_ENABLED = True
 #HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_DIR = 'httpcache'

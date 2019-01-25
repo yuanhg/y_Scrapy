@@ -7,7 +7,7 @@ from scrapy.pipelines.images import ImagesPipeline
 class Xrk8Pipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         for imgUrl in item['image_urls']:
-            yield scrapy.Request(imgUrl, callback=self.parse_image)
+            yield scrapy.Request(imgUrl)
 
     def item_completed(self, results, item, info):
         image_path = [x['path'] for ok, x in results if ok]
@@ -16,6 +16,7 @@ class Xrk8Pipeline(ImagesPipeline):
         item['image_paths'] = image_path
         return item
 
+    '''
     def parse_image(self, response):
         # 定义图片名字
         name = "0000.png"
@@ -23,7 +24,5 @@ class Xrk8Pipeline(ImagesPipeline):
         img_save_path = "D:/wallpapers/" + name
         with open(img_save_path,"wb") as fw:
             fw.write(response.body)
-    '''
-    def process_item(self, item, spider):
-    return item
+    
     '''
