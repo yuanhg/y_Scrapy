@@ -30,10 +30,14 @@ COOKIES_ENABLED = False
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-#}
+DEFAULT_REQUEST_HEADERS = {
+    'Accept-language': 'zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/71.0.3578.98 Safari/537.3',
+    'Accept': 'application/json, text/javascript, */*; q=0.01,text/html,application/xhtml+xml,application/xml;q=0.9,'
+              '*/*;q=0.8',
+    'accept-encoding': 'gzip, deflate',
+}
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
@@ -61,7 +65,7 @@ ITEM_PIPELINES = {
 HTTPERROR_ALLOWED_CODES = [301,302]
 MEDIA_ALLOW_REDIRECTS = True
 
-IMAGES_STORE = 'D:/wallpapers'
+IMAGES_STORE = 'D:\himavari8'
 IMAGES_URLS_FIELD = 'images'
 IMAGES_MIN_HEIGHT = 110
 IMAGES_MIN_WIDTH = 110
